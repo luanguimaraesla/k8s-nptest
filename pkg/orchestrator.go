@@ -36,29 +36,28 @@ type NetPerfRpc int
 func Orchestrate(d bool, rc bool) {
 	debug = d
 	testcases = []*types.Testcase{
-
     // Configuration for remote cluster 
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "14 iperf TCP. Remote Cluster using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "15 iperf UDP. Remote Cluster using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "16 netperf. Remote Cluster using Pod IP", Type: netperfTest, ClusterIP: false},
 
     // Common Tests
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "1 iperf TCP. Same VM using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "2 iperf TCP. Same VM using Virtual IP", Type: iperfTcpTest, ClusterIP: true, MSS: mssMin},
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "3 iperf TCP. Remote VM using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
 		{SourceNode: "netperf-w3", DestinationNode: "netperf-w2", Label: "4 iperf TCP. Remote VM using Virtual IP", Type: iperfTcpTest, ClusterIP: true, MSS: mssMin},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "5 iperf TCP. Remote Cluster using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
 
-		{SourceNode: "netperf-w2", DestinationNode: "netperf-w2", Label: "5 iperf TCP. Hairpin Pod to own Virtual IP", Type: iperfTcpTest, ClusterIP: true, MSS: mssMin},
+		{SourceNode: "netperf-w2", DestinationNode: "netperf-w2", Label: "6 iperf TCP. Hairpin Pod to own Virtual IP", Type: iperfTcpTest, ClusterIP: true, MSS: mssMin},
 
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "6 iperf UDP. Same VM using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "7 iperf UDP. Same VM using Virtual IP", Type: iperfUdpTest, ClusterIP: true, MSS: mssMax},
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "8 iperf UDP. Remote VM using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
-		{SourceNode: "netperf-w3", DestinationNode: "netperf-w2", Label: "9 iperf UDP. Remote VM using Virtual IP", Type: iperfUdpTest, ClusterIP: true, MSS: mssMax},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "7 iperf UDP. Same VM using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "8 iperf UDP. Same VM using Virtual IP", Type: iperfUdpTest, ClusterIP: true, MSS: mssMax},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "9 iperf UDP. Remote VM using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
+		{SourceNode: "netperf-w3", DestinationNode: "netperf-w2", Label: "10 iperf UDP. Remote VM using Virtual IP", Type: iperfUdpTest, ClusterIP: true, MSS: mssMax},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "11 iperf UDP. Remote Cluster using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
 
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "10 netperf. Same VM using Pod IP", Type: netperfTest, ClusterIP: false},
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "11 netperf. Same VM using Virtual IP", Type: netperfTest, ClusterIP: true},
-		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "12 netperf. Remote VM using Pod IP", Type: netperfTest, ClusterIP: false},
-		{SourceNode: "netperf-w3", DestinationNode: "netperf-w2", Label: "13 netperf. Remote VM using Virtual IP", Type: netperfTest, ClusterIP: true},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "12 netperf. Same VM using Pod IP", Type: netperfTest, ClusterIP: false},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "13 netperf. Same VM using Virtual IP", Type: netperfTest, ClusterIP: true},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "14 netperf. Remote VM using Pod IP", Type: netperfTest, ClusterIP: false},
+		{SourceNode: "netperf-w3", DestinationNode: "netperf-w2", Label: "15 netperf. Remote VM using Virtual IP", Type: netperfTest, ClusterIP: true},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "16 netperf. Remote Cluster using Pod IP", Type: netperfTest, ClusterIP: false},
 
 	}
 

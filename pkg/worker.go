@@ -133,7 +133,7 @@ func iperfClient(serverHost, serverPort string, mss int, workItemType int) (rv s
 
 	case workItemType == iperfUdpTest:
 		integration.PrettyPrintInfo("Starting iperf udp client on %s to %s", clientData.Worker, serverHost)
-		output, success := cmdExec(iperf3Path, []string{"-c", serverHost, "-p", serverPort, "-i", "30", "-t", "10", "-f", "m", "-b", "0", "-u"})
+		output, success := cmdExec(iperf3Path, []string{"-c", serverHost, "-p", serverPort, "-i", "30", "-t", "10", "-l", "1422", "-f", "m", "-b", "0", "-u"})
 		if success {
 			rv = output
 		}

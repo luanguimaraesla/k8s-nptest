@@ -22,7 +22,7 @@ const (
 	outputCaptureFile = "/tmp/output.txt"
 	resultCaptureFile = "/tmp/result.csv"
 	mssMin            = 96
-	mssMax            = 1460
+	mssMax            = 1422 // Max MSS for AWS VPC Peering MTU with VXLAN encapsulation: 1500
 	mssStepSize       = 64
 
 	rpcServicePort    = "5202"
