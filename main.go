@@ -28,7 +28,7 @@ func main() {
 	if mode == pkg.OrchestratorMode {
 		pkg.Orchestrate(debug, remoteCluster)
 	} else {
-		pkg.Work(debug, remoteCluster)
+		pkg.Work(debug)
 	}
 	integration.PrettyPrint("Terminating")
 }

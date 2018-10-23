@@ -35,7 +35,6 @@ type NetPerfRpc int
 // Blocking RPC server start - only runs on the orchestrator
 func Orchestrate(d bool, rc bool) {
 	debug = d
-  remoteCluster = rc
 	testcases = []*types.Testcase{
 
     // Configuration for remote cluster 
