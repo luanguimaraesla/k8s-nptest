@@ -4,5 +4,6 @@
 *.iml
 *.tmp
 *.bz2
+k8s-nptest
 vendor/
 -v

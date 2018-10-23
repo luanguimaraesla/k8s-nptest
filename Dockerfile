@@ -11,6 +11,6 @@ RUN mkdir -p /tmp
 RUN curl -LO https://github.com/HewlettPackard/netperf/archive/netperf-2.7.0.tar.gz && tar -xzf netperf-2.7.0.tar.gz
 RUN cd netperf-netperf-2.7.0 && ./configure --prefix=/usr/local --bindir /usr/local/bin && make && make install
 
-COPY nptests /usr/bin/
+COPY k8s-nptest /usr/bin/nptests
 RUN chmod +x /usr/bin/nptests
 ENTRYPOINT ["/usr/bin/nptests"]
