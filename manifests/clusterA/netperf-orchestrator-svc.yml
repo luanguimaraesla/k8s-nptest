@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: orchestrator
+  namespace: network-test
   labels:
     app: orchestrator
 spec:
