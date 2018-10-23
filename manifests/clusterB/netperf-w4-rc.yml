@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: network-test
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: worker4
+spec:
+  replicas: 1
+  selector:
+    app: worker
+    worker: w4
+  template:
+    metadata:
+      name: worker4
+      labels:
+        app: worker
+        worker: w4
+    spec:
+      containers:
+      - name: w4
+        image: luanguimaraesla/netperf:0.2.0
+        imagePullPolicy: Always
+        args:
+        - --mode=worker
+        # - -debug
+        ports:
+        - name: iperf3-port
+          protocol: UDP
+          containerPort: 5201
+        - name: netperf-port
+          protocol: TCP
+          containerPort: 12865
+        env:
+        - name: workerName
+          value: "netperf-w4"
+        - name: workerPodIP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: orchestratorPort
+          value: "5202"
+        - name: orchestratorPodIP
+          value: "YOU FORGOT TO SETUP THE ORCHESTRATOR IP, PLEASE EDIT THE MANIFEST"

@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: worker3
+spec:
+  replicas: 1
+  selector:
+    app: worker
+    worker: w3
+  template:
+    metadata:
+      name: worker3
+      labels:
+        app: worker
+        worker: w3
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: worker
+                operator: In
+                values:
+                - w1
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: w3
+        image: luanguimaraesla/netperf:0.2.0
+        imagePullPolicy: Always
+        args:
+        - --mode=worker
+        # - -debug
+        ports:
+        - name: iperf3-port
+          protocol: UDP
+          containerPort: 5201
+        - name: netperf-port
+          protocol: TCP
+          containerPort: 12865
+        env:
+        - name: workerName
+          value: "netperf-w3"
+        - name: workerPodIP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: orchestratorPort
+          value: "5202"
+        - name: orchestratorPodIP
+          value: orchestrator
