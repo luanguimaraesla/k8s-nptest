@@ -2,16 +2,18 @@ package main
 
 import (
 	"flag"
-	"github.com/mrahbar/k8s-nptest/integration"
-	"github.com/mrahbar/k8s-nptest/pkg"
+	"github.com/luanguimaraesla/k8s-nptest/integration"
+	"github.com/luanguimaraesla/k8s-nptest/pkg"
 	"os"
 )
 
 var mode string
 var debug bool
+var remoteCluster bool
 
 func init() {
 	flag.StringVar(&mode, "mode", "worker", "Mode for the daemon (worker | orchestrator)")
+  flag.BoolVar(&remoteCluster, "remote-cluster", false, "Enable remote cluster tests")
 	flag.BoolVar(&debug, "debug", false, "Increase debugging output")
 }
 
@@ -24,9 +26,9 @@ func main() {
 
 	integration.PrintHeader("Running as "+mode+" ", '=')
 	if mode == pkg.OrchestratorMode {
-		pkg.Orchestrate(debug)
+		pkg.Orchestrate(debug, remoteCluster)
 	} else {
-		pkg.Work(debug)
+		pkg.Work(debug, remoteCluster)
 	}
 	integration.PrettyPrint("Terminating")
 }

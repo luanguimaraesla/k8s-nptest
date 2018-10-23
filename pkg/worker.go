@@ -2,8 +2,8 @@ package pkg
 
 import (
 	"bytes"
-	"github.com/mrahbar/k8s-nptest/integration"
-	"github.com/mrahbar/k8s-nptest/types"
+	"github.com/luanguimaraesla/k8s-nptest/integration"
+	"github.com/luanguimaraesla/k8s-nptest/types"
 	"net/rpc"
 	"os"
 	"os/exec"

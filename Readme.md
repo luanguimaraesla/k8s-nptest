@@ -31,7 +31,7 @@ The orchestrator and worker pods run independently of the initiator script, with
 The iperf output (both TPC and UDP modes) and the netperf TCP output from all worker nodes is uploaded to the orchestrator pod where it is filtered and the results are written to the output file as well as to stdout log.
 Default file locations are /tmp/result.csv and /tmp/output.txt for the raw results.
 
-## Output Raw CSV data
+## Output Raw CSV data [OUTDATED]
 **All units in the csv file are in Gbits/second**
 ```console
 ALL TESTCASES AND MSS RANGES COMPLETE - GENERATING CSV OUTPUT

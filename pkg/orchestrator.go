@@ -2,8 +2,8 @@ package pkg
 
 import (
 	"fmt"
-	"github.com/mrahbar/k8s-nptest/integration"
-	"github.com/mrahbar/k8s-nptest/types"
+	"github.com/luanguimaraesla/k8s-nptest/integration"
+	"github.com/luanguimaraesla/k8s-nptest/types"
 	"net"
 	"net/http"
 	"net/rpc"
@@ -33,9 +33,17 @@ const defaultBandwithFailed = "-1"
 type NetPerfRpc int
 
 // Blocking RPC server start - only runs on the orchestrator
-func Orchestrate(d bool) {
+func Orchestrate(d bool, rc bool) {
 	debug = d
+  remoteCluster = rc
 	testcases = []*types.Testcase{
+
+    // Configuration for remote cluster 
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "14 iperf TCP. Remote Cluster using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "15 iperf UDP. Remote Cluster using Pod IP", Type: iperfUdpTest, ClusterIP: false, MSS: mssMax},
+		{SourceNode: "netperf-w1", DestinationNode: "netperf-w4", Label: "16 netperf. Remote Cluster using Pod IP", Type: netperfTest, ClusterIP: false},
+
+    // Common Tests
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "1 iperf TCP. Same VM using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "2 iperf TCP. Same VM using Virtual IP", Type: iperfTcpTest, ClusterIP: true, MSS: mssMin},
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "3 iperf TCP. Remote VM using Pod IP", Type: iperfTcpTest, ClusterIP: false, MSS: mssMin},
@@ -52,6 +60,7 @@ func Orchestrate(d bool) {
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w2", Label: "11 netperf. Same VM using Virtual IP", Type: netperfTest, ClusterIP: true},
 		{SourceNode: "netperf-w1", DestinationNode: "netperf-w3", Label: "12 netperf. Remote VM using Pod IP", Type: netperfTest, ClusterIP: false},
 		{SourceNode: "netperf-w3", DestinationNode: "netperf-w2", Label: "13 netperf. Remote VM using Virtual IP", Type: netperfTest, ClusterIP: true},
+
 	}
 
 	initializeOutputFiles(outputCaptureFile)
